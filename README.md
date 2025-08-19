@@ -1,4 +1,4 @@
-# MindTrack [MindTrack](https://deenaapawaskar.github.io/MindTrack/)
+# [MindTrack](https://deenaapawaskar.github.io/MindTrack/)
 
 
 
