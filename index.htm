@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎓Student Performance Analyzer</h1>
+            <p class="header-subtitle">AI-powered learning insights to help students succeed</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="student">Student Analysis</button>
+            <button class="nav-tab" data-tab="teacher">Teacher Dashboard</button>
+            <button class="nav-tab" data-tab="about">About</button>
+        </nav>
+
+        <!-- Student Analysis Tab -->
+        <div class="tab-content active" id="student-tab">
+            <!-- Input Form -->
+            <div class="card input-section">
+                <div class="card__header">
+                    <h2>Learning Traits Assessment</h2>
+                    <p>Rate each learning trait on a scale of 0-10</p>
+                </div>
+                <div class="card__body">
+                    <form id="student-form">
+                        <div class="form-group">
+                            <label class="form-label" for="student-name">Student Name</label>
+                            <input type="text" id="student-name" class="form-control" placeholder="Enter student name" required>
+                        </div>
+
+                        <div class="traits-grid">
+                            <!-- Growth Mindset -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Growth Mindset
+                                    <span class="trait-help" title="Believes abilities can be developed through dedication and hard work">🧠</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="growth_mindset" min="0" max="10" value="5" class="trait-slider positive">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Spaced Practice -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Spaced Practice
+                                    <span class="trait-help" title="Reviews material at increasing intervals rather than cramming">⏳</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="spaced_practice" min="0" max="10" value="5" class="trait-slider positive">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Deep Engagement -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Deep Engagement
+                                    <span class="trait-help" title="Actively participates and focuses deeply during learning">🔥</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="deep_engagement" min="0" max="10" value="5" class="trait-slider positive">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Self Monitoring -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Self-Monitoring
+                                    <span class="trait-help" title="Regularly checks understanding and adjusts learning strategies">🔍</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="self_monitoring" min="0" max="10" value="5" class="trait-slider positive">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Balanced Thinking -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Balanced Thinking
+                                    <span class="trait-help" title="Uses both focused and diffused modes of thinking effectively">⚖️</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="balanced_thinking" min="0" max="10" value="5" class="trait-slider positive">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Fixed Mindset -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Fixed Mindset
+                                    <span class="trait-help" title="Believes abilities are static and cannot be significantly improved">🪨</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="fixed_mindset" min="0" max="10" value="5" class="trait-slider negative">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Passive Learning -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Passive Learning
+                                    <span class="trait-help" title="Relies on passive methods like re-reading instead of active strategies">🪑</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="passive_learning" min="0" max="10" value="5" class="trait-slider negative">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Procrastination -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Procrastination
+                                    <span class="trait-help" title="Tends to delay important academic tasks and assignments">🕑</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="procrastination" min="0" max="10" value="5" class="trait-slider negative">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Avoid Struggle -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Avoid Struggle
+                                    <span class="trait-help" title="Gives up quickly when faced with challenging material">🏃‍♂️</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="avoid_struggle" min="0" max="10" value="5" class="trait-slider negative">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+
+                            <!-- Low Metacognition -->
+                            <div class="trait-item">
+                                <label class="trait-label">
+                                    Low Metacognition
+                                    <span class="trait-help" title="Lacks awareness of own thinking and learning processes">💡</span>
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="low_metacognition" min="0" max="10" value="5" class="trait-slider negative">
+                                    <span class="slider-value">5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg btn--full-width">
+                            🔍 Analyze Performance
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section hidden" id="results">
+                <!-- Prediction Result -->
+                <div class="card result-card">
+                    <div class="card__body">
+                        <div class="prediction-result">
+                            <div class="prediction-icon" id="prediction-icon"></div>
+                            <div class="prediction-content">
+                                <h2 id="prediction-text"></h2>
+                                <p id="prediction-subtitle"></p>
+                                <div class="confidence-score">
+                                    <span>Confidence Score: </span>
+                                    <span id="confidence-value"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <!-- Radar Chart -->
+                    <div class="card chart-card">
+                        <div class="card__header">
+                            <h3>Learning Profile</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Importance Chart -->
+                    <div class="card chart-card">
+                        <div class="card__header">
+                            <h3>Feature Importance</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="importanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Gauge -->
+                    <div class="card chart-card">
+                        <div class="card__header">
+                            <h3>Overall Performance</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="gaugeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="card recommendations-card">
+                    <div class="card__header">
+                        <h3>📚Personalized Recommendations</h3>
+                    </div>
+                    <div class="card__body">
+                        <div id="recommendations-content">
+                            <!-- Recommendations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard Tab -->
+        <div class="tab-content" id="teacher-tab">
+            <div class="card">
+                <div class="card__header">
+                    <h2>👩‍🏫« Teacher Dashboard</h2>
+                    <p>Analyze multiple students or upload CSV data</p>
+                </div>
+                <div class="card__body">
+                    <div class="teacher-actions">
+                        <button class="btn btn--secondary" id="load-sample-data">Load Sample Class Data</button>
+                        <div class="csv-upload">
+                            <input type="file" id="csv-upload" accept=".csv" class="hidden">
+                            <button class="btn btn--outline" onclick="document.getElementById('csv-upload').click()">
+                                📁 Upload CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Class Statistics -->
+                    <div class="class-stats hidden" id="class-stats">
+                        <h3>Class Overview</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value" id="total-students">0</div>
+                                <div class="stat-label">Total Students</div>
+                            </div>
+                            <div class="stat-item good">
+                                <div class="stat-value" id="good-performance">0</div>
+                                <div class="stat-label">Good Performance</div>
+                            </div>
+                            <div class="stat-item improve">
+                                <div class="stat-value" id="can-improve">0</div>
+                                <div class="stat-label">Can Improve</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="class-average">0%</div>
+                                <div class="stat-label">Class Average</div>
+                            </div>
+                        </div>
+
+                        <!-- Class Charts -->
+                        <div class="charts-grid">
+                            <div class="card chart-card">
+                                <div class="card__header">
+                                    <h4>Class Performance Distribution</h4>
+                                </div>
+                                <div class="card__body">
+                                    <div class="chart-container" style="position: relative; height: 250px;">
+                                        <canvas id="classDistributionChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card chart-card">
+                                <div class="card__header">
+                                    <h4>Average Trait Scores</h4>
+                                </div>
+                                <div class="card__body">
+                                    <div class="chart-container" style="position: relative; height: 250px;">
+                                        <canvas id="classAveragesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student List -->
+                        <div class="card">
+                            <div class="card__header">
+                                <h4>Student Results</h4>
+                            </div>
+                            <div class="card__body">
+                                <div class="student-list" id="student-list">
+                                    <!-- Student results will be populated here -->
+                                </div>
+                                <button class="btn btn--primary" id="export-results">
+                                    📝 Export Results
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div class="tab-content" id="about-tab">
+            <div class="card">
+                <div class="card__header">
+                    <h2>🧪  About the Student Performance Analyzer</h2>
+                </div>
+                <div class="card__body">
+                    <div class="about-content">
+                        <h3>How It Works</h3>
+                        <p>This tool uses a trained perceptron neural network to analyze student learning traits and predict academic performance. The model was trained on real student data with 81.25% accuracy.</p>
+
+                        <h3>The Science Behind It</h3>
+                        <p>Our prediction model considers 10 key learning traits based on educational psychology research:</p>
+                        <ul>
+                            <li><strong>Growth Mindset:</strong> Belief that abilities can be developed</li>
+                            <li><strong>Spaced Practice:</strong> Distributed learning over time</li>
+                            <li><strong>Deep Engagement:</strong> Active participation in learning</li>
+                            <li><strong>Self-Monitoring:</strong> Awareness of own learning process</li>
+                            <li><strong>Balanced Thinking:</strong> Using both focused and diffused thinking</li>
+                        </ul>
+
+                        <h3>Model Performance</h3>
+                        <div class="model-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">81.25%</div>
+                                <div class="stat-label">Accuracy</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">160</div>
+                                <div class="stat-label">Training Samples</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">10</div>
+                                <div class="stat-label">Features</div>
+                            </div>
+                        </div>
+
+                        <h3>How to Use</h3>
+                        <ol>
+                            <li>Rate each learning trait on a scale of 0-10</li>
+                            <li>Click "Analyze Performance" to get predictions</li>
+                            <li>Review personalized recommendations</li>
+                            <li>Track progress over time</li>
+                        </ol>
+
+                        <div class="disclaimer">
+                            <h4>Important Note</h4>
+                            <p>This tool is designed to support learning and should be used alongside professional educational guidance. Predictions are based on learning behaviors and may not reflect all factors affecting academic performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
